@@ -2,14 +2,13 @@
   "name": "typescript-koa",
   "version": "1.0.0",
   "description": "Code for TS/Koa/TypeORM blog post",
-  "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
     "lint": "tslint --project tsconfig.json --format stylish",
     "prebuild": "npm run clean",
     "build": "tsc",
-    "prestart": "npm run clean",
-    "start": "tsc --watch"
+    "serve": "ts-node src/server.ts",
+    "start": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -33,6 +32,9 @@
     "@types/koa": "^2.0.46",
     "@types/koa-router": "^7.0.32",
     "@types/node": "^10.12.0",
+    "nodemon": "^1.18.5",
+    "rimraf": "^2.6.2",
+    "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
     "tslint-config-airbnb": "^5.11.0",
     "typescript": "^3.1.3"
