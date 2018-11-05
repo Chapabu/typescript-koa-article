@@ -3,9 +3,6 @@ import databaseConnection from './database/database.connection';
 
 const PORT = Number(process.env.PORT) || 3000;
 
-async function startServer() {
-  await databaseConnection;
-  app.listen(PORT);
-}
-
-startServer();
+databaseConnection
+  .then(() => app.listen(PORT))
+  .catch(console.error);
