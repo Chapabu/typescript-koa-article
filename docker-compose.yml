@@ -4,6 +4,7 @@ services:
 
   database:
     image: postgres:11-alpine
+    restart: always
     expose:
       - "5432"
     ports:
@@ -11,10 +12,11 @@ services:
     environment:
       POSTGRES_DB: typescript-koa
 
-  pgadmin:
-    image: dpage/pgadmin4
+  adminer:
+    image: adminer:latest
+    restart: always
     ports:
-      - "8080:80"
+      - "8080:8080"
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@example.com
-      PGADMIN_DEFAULT_PASSWORD: supersecret
+      ADMINER_DEFAULT_SERVER: database
+      ADMINER_DESIGN: lucas-sandery
