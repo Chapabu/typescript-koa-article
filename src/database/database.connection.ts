@@ -1,5 +1,7 @@
 import 'reflect-metadata';
 import { createConnection, Connection, ConnectionOptions } from 'typeorm';
+import { join } from 'path';
+const parentDir = join(__dirname, '..');
 
 const connectionOpts: ConnectionOptions = {
   type: 'postgres',
@@ -9,10 +11,7 @@ const connectionOpts: ConnectionOptions = {
   password: process.env.DB_PASSWORD || 'postgres',
   database: process.env.DB_NAME || 'typescript-koa',
   entities: [
-    // Both are required here as we're working with ts-node, and we want the
-    // compiled TS to continue working.
-    `${__dirname}/**/*.entity.js`,
-    `${__dirname}/**/*.entity.ts`,
+    `${parentDir}/**/*.entity.ts`,
   ],
   synchronize: true,
 };
