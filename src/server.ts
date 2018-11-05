@@ -1,15 +1,11 @@
-import * as Koa from 'koa';
-import database from './database';
+import app from './app/app';
+import databaseConnection from './database/database.connection';
 
-import moviesController from './routes/movies.controller';
+const PORT = Number(process.env.PORT) || 3000;
 
-const app:Koa = new Koa();
-const PORT:number = Number(process.env.PORT) || 3000;
+async function startServer() {
+  await databaseConnection;
+  app.listen(PORT);
+}
 
-app.use(moviesController.routes());
-app.use(moviesController.allowedMethods());
-
-database
-  .then(() => {
-    app.listen(PORT);
-  });
+startServer();

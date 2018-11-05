@@ -11,8 +11,8 @@ const connectionOpts: ConnectionOptions = {
   entities: [
     // Both are required here as we're working with ts-node, and we want the
     // compiled TS to continue working.
-    `${__dirname}/entities/*.entity.js`,
-    `${__dirname}/entities/*.entity.ts`,
+    `${__dirname}/**/*.entity.js`,
+    `${__dirname}/**/*.entity.ts`,
   ],
   synchronize: true,
 };

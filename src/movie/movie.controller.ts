@@ -1,5 +1,7 @@
 import * as Koa from 'koa';
 import * as Router from 'koa-router';
+import { getRepository } from 'typeorm';
+import movieEntity from '../entities/movie.entity';
 
 const routerOpts: Router.IRouterOptions = {
   prefix: '/movies',
