@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Code for TS/Koa/TypeORM blog post",
   "scripts": {
-    "clean": "rimraf dist",
     "lint": "tslint --project tsconfig.json --format stylish",
     "prebuild": "npm run clean",
     "build": "tsc",
