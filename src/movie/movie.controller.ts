@@ -38,7 +38,7 @@ router.post('/', async (ctx:Koa.Context) => {
   const movieRepo:Repository<movieEntity> = getRepository(movieEntity);
 
   const movie: movieEntity = movieRepo.create(ctx.request.body);
-  console.log(movie);
+
   await movieRepo.save(movie);
   ctx.status = HttpStatus.CREATED;
   ctx.body = {
@@ -46,8 +46,17 @@ router.post('/', async (ctx:Koa.Context) => {
   };
 });
 
-router.delete('/:movie_id', (ctx:Koa.Context) => {
-  ctx.body = `DELETE: SINGLE MOVIE (${ctx.params.movie_id})`;
+router.delete('/:movie_id', async (ctx:Koa.Context) => {
+  const movieRepo:Repository<movieEntity> = getRepository(movieEntity);
+
+  const movie = await movieRepo.findOne(ctx.params.movie_id);
+
+  if (!movie) {
+    ctx.throw(HttpStatus.NOT_FOUND);
+  }
+
+  await movieRepo.delete(movie);
+  ctx.status = HttpStatus.NO_CONTENT;
 });
 
 router.patch('/:movie_id', async (ctx:Koa.Context) => {
@@ -56,7 +65,7 @@ router.patch('/:movie_id', async (ctx:Koa.Context) => {
   const movie:movieEntity = await movieRepo.findOne(ctx.params.movie_id);
 
   if (!movie) {
-    ctx.throw(HttpStatus.NOT_FOUND, 'Not found');
+    ctx.throw(HttpStatus.NOT_FOUND);
   }
 
   const updatedMovie = await movieRepo.merge(movie, ctx.request.body);
